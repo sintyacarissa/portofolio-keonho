@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEONHO CORTIS // Official Cheerful & Bright Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sunshine: {
+                50: '#fffbe1',
+                100: '#fef3c7',
+                200: '#fde68a',
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#f59e0b',
+                600: '#d97706',
+              },
+              pastelSky: '#e0f2fe',
+              pastelPink: '#fce7f3',
+              pastelMint: '#dcfce7',
+              cheerfulCard: '#ffffff',
+              warmBg: '#fefce8',
+              softText: '#1e293b',
+              mutedText: '#64748b'
+            },
+            fontFamily: {
+              fredoka: ['Fredoka', 'sans-serif'],
+              jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+              grotesk: ['Space Grotesk', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <style>
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fefce8;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #fcd34d;
+        border-radius: 999px;
+      }
+      .bright-glow {
+        box-shadow: 0 10px 30px -5px rgba(251, 191, 36, 0.35), 0 8px 15px -6px rgba(56, 189, 248, 0.2);
+      }
+      .sticker-rotate-left {
+        transform: rotate(-3deg);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .sticker-rotate-left:hover {
+        transform: rotate(0deg) scale(1.06);
+      }
+      .sticker-rotate-right {
+        transform: rotate(3deg);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .sticker-rotate-right:hover {
+        transform: rotate(0deg) scale(1.06);
+      }
+      .bubble-bg {
+        background-color: #fefce8;
+        background-image: radial-gradient(#fde68a 1.5px, transparent 1.5px), radial-gradient(#bae6fd 1.5px, #fefce8 1.5px);
+        background-size: 30px 30px;
+        background-position: 0 0, 15px 15px;
+      }
+      .text-gradient-sunshine {
+        background: linear-gradient(135deg, #d97706 0%, #f59e0b 40%, #0284c7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+</head>
+<body class="bg-warmBg text-softText font-jakarta antialiased selection:bg-sunshine-300 selection:text-slate-900 min-h-screen bubble-bg" x-data="keonhoApp()">
+
+    <!-- IN-APP TOAST NOTIFICATION SYSTEM -->
+    <div x-show="showToast" 
+         x-transition:enter="transition ease-out duration-300 transform"
+         x-transition:enter-start="opacity-0 translate-y-[-20px] scale-95"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-200 transform"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-[-20px] scale-95"
+         class="fixed top-5 right-5 z-50 bg-white/95 backdrop-blur-md text-slate-800 font-jakarta text-xs font-bold px-6 py-3.5 rounded-2xl shadow-2xl border-2 border-sunshine-400 flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-full bg-sunshine-400 flex items-center justify-center text-slate-900 text-sm animate-bounce">
+            ✨
+        </div>
+        <span x-text="toastMessage"></span>
+    </div>
+
+    <!-- TOP TICKER BAR WITH BRIGHT SUNNY GRADIENT -->
+    <div class="bg-gradient-to-r from-sunshine-300 via-amber-200 to-sky-200 text-slate-900 font-fredoka text-xs font-bold py-2.5 px-4 overflow-hidden border-b-2 border-sunshine-300 flex items-center justify-between shadow-sm">
+        <div class="flex items-center space-x-6 whitespace-nowrap">
+            <span class="flex items-center gap-1 text-amber-900"><i class="fa-solid fa-sun text-amber-500 animate-spin"></i> CORTIS OFFICIAL YELLOW ARCHIVE</span>
+            <span>✨</span>
+            <span>AHN GEON HO (안건호) PORTFOLIO</span>
+            <span>✨</span>
+            <span>MAKNAE, VOKALIS & DANCER</span>
+            <span>✨</span>
+            <span>EX-TOP COMPETITIVE SWIMMER</span>
+            <span>✨</span>
+            <span>DEBUT: 18 AGUSTUS 2025</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-2 bg-white/80 text-amber-900 border border-amber-300 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+            <span>BRIGHT & CHEERFUL MODE</span>
+        </div>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b-2 border-amber-100 px-6 py-3.5 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 bg-gradient-to-tr from-sunshine-400 via-amber-300 to-sky-300 text-slate-900 font-fredoka font-bold flex items-center justify-center text-xl rounded-2xl border-2 border-white shadow-md group-hover:rotate-6 transition-transform">
+                    KH
+                </div>
+                <div>
+                    <h1 class="font-fredoka font-bold text-xl text-slate-900 group-hover:text-amber-600 transition-colors flex items-center gap-1">
+                        KEONHO <span class="text-amber-500">.CORTIS</span> 💛
+                    </h1>
+                    <p class="text-[10px] font-bold text-amber-700 tracking-wider">BIGHIT MUSIC • INTP MAKNAE</p>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <div class="hidden lg:flex items-center space-x-8 font-fredoka text-sm font-semibold text-slate-700">
+                <a href="#about" class="hover:text-amber-600 transition-colors flex items-center space-x-1">
+                    <span class="text-amber-500 font-bold">01.</span> <span>PROFIL & BIODATA</span>
+                </a>
+                <a href="#facts" class="hover:text-amber-600 transition-colors flex items-center space-x-1">
+                    <span class="text-sky-500 font-bold">02.</span> <span>FAKTA MENARIK</span>
+                </a>
+                <a href="#timeline" class="hover:text-amber-600 transition-colors flex items-center space-x-1">
+                    <span class="text-amber-500 font-bold">03.</span> <span>PERJALANAN</span>
+                </a>
+                <a href="#discography" class="hover:text-amber-600 transition-colors flex items-center space-x-1">
+                    <span class="text-sky-500 font-bold">04.</span> <span>KARYA MUSIK</span>
+                </a>
+                <a href="#fanzone" class="hover:text-amber-600 transition-colors flex items-center space-x-1">
+                    <span class="text-amber-500 font-bold">05.</span> <span>FAN ROOM</span>
+                </a>
+            </div>
+
+            <!-- Audio Player Preview Button -->
+            <button @click="toggleMusic()" class="px-5 py-2.5 bg-gradient-to-r from-sunshine-100 to-amber-200 border-2 border-sunshine-300 hover:border-sunshine-400 rounded-full text-xs font-fredoka font-bold flex items-center space-x-2 transition-all shadow-md text-amber-950">
+                <i class="fa-solid" :class="isPlaying ? 'fa-pause text-amber-700' : 'fa-play text-amber-600'"></i>
+                <span x-text="isPlaying ? 'NOW PLAYING: CORTIS GO!' : 'PLAY CORTIS PREVIEW'"></span>
+                <span class="w-2.5 h-2.5 rounded-full" :class="isPlaying ? 'bg-amber-500 animate-ping' : 'bg-slate-400'"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION WITH CHEERFUL SUNNY GRAPHICS & PHOTO PLACEHOLDER -->
+    <header class="relative max-w-7xl mx-auto px-6 pt-10 pb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Hero Left Info -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center space-x-2 px-4 py-2 bg-sunshine-100 border-2 border-sunshine-300 text-amber-900 text-xs font-fredoka font-bold rounded-full shadow-sm">
+                    <span class="animate-bounce">✨</span>
+                    <span>CORTIS BRIGHT MAKNAE & MULTI-TALENTED ARTIST</span>
+                </div>
+
+                <h1 class="text-5xl sm:text-7xl lg:text-8xl font-fredoka font-bold tracking-tight leading-none text-slate-900">
+                    AHN <br/>
+                    <span class="text-gradient-sunshine">
+                        GEON HO
+                    </span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-slate-700 max-w-xl font-jakarta font-medium leading-relaxed">
+                    Mantan perenang kompetitif cilik berprestasi yang kini bersinar terang sebagai <span class="text-amber-700 font-bold underline decoration-sunshine-400 decoration-2">Maknae, Vokalis, dan Dancer</span> serba bisa di grup <span class="font-bold text-slate-900">CORTIS</span> (BigHit Music). Dikenal dengan bakat musik yang jenius, kepribadian INTP yang ramah, serta warna representatif <span class="bg-sunshine-300 text-amber-950 font-bold px-2.5 py-0.5 rounded-lg shadow-sm border border-sunshine-400">🟡 Kuning Ceria (Bright Yellow)</span>!
+                </p>
+
+                <!-- Attributes Badges -->
+                <div class="flex flex-wrap gap-3 pt-1">
+                    <span class="px-4 py-2 bg-white border-2 border-amber-200 rounded-2xl text-xs font-jakarta font-bold text-slate-800 flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-heart text-pink-500"></i> 14 Februari 2009 (Valentine Boy)
+                    </span>
+                    <span class="px-4 py-2 bg-white border-2 border-amber-200 rounded-2xl text-xs font-jakarta font-bold text-slate-800 flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-star text-amber-400"></i> Aquarius
+                    </span>
+                    <span class="px-4 py-2 bg-white border-2 border-amber-200 rounded-2xl text-xs font-jakarta font-bold text-slate-800 flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-droplet text-red-500"></i> Golongan Darah O
+                    </span>
+                    <span class="px-4 py-2 bg-white border-2 border-amber-200 rounded-2xl text-xs font-jakarta font-bold text-slate-800 flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-lightbulb text-sky-500"></i> INTP Genius
+                    </span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-3">
+                    <a href="#about" class="px-8 py-4 bg-gradient-to-r from-sunshine-400 via-amber-400 to-amber-500 text-slate-900 font-fredoka font-bold rounded-2xl hover:scale-105 transition-all shadow-lg bright-glow flex items-center gap-2 text-base border-2 border-white">
+                        <i class="fa-solid fa-id-card text-amber-950"></i> BIODATA LENGKAP KEONHO
+                    </a>
+                    <a href="#facts" class="px-6 py-4 bg-white border-2 border-amber-300 hover:bg-sunshine-100 font-fredoka text-sm font-bold rounded-2xl transition-all flex items-center gap-2 text-amber-900 shadow-sm">
+                        <i class="fa-solid fa-face-smile text-amber-500"></i> FAKTA MENARIK
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Right Card with BRIGHT EASY-TO-REPLACE DUMMY PHOTO -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <!-- Glowing Backdrops -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-sunshine-300/40 rounded-full blur-3xl -z-10"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-sky-200/50 rounded-full blur-3xl -z-10"></div>
+
+                <!-- Main Cheerful Card -->
+                <div class="w-full max-w-md bg-white border-4 border-sunshine-300 rounded-3xl p-6 shadow-xl relative overflow-hidden">
+                    
+                    <!-- Top Card Header -->
+                    <div class="flex justify-between items-center border-b-2 border-amber-100 pb-3 mb-4 font-fredoka text-xs">
+                        <span class="text-amber-800 font-bold">ID: BIGHIT-20090214-KH</span>
+                        <span class="px-3 py-1 rounded-full bg-sunshine-400 text-slate-900 font-bold text-[11px] shadow-sm">CORTIS MAKNAE</span>
+                    </div>
+
+                    <!-- ================================================================= -->
+                    <!-- FOTO DUMMY UTAMA HERO (GANTI URL DI SINI)                          -->
+                    <!-- ================================================================= -->
+                    <div class="relative rounded-2xl overflow-hidden border-2 border-sunshine-200 group mb-4 shadow-inner">
+                        <img 
+                            src="poto porfile.jpg" 
+                            alt="Foto Keonho CORTIS" 
+                            class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80"></div>
+                        
+                        <!-- Overlay Text -->
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                            <div>
+                                <h3 class="text-2xl font-fredoka font-bold text-white drop-shadow-md">Keonho (건호)</h3>
+                                <p class="text-xs font-jakarta text-sunshine-200 font-semibold">Ahn Geon Ho • 안건호</p>
+                            </div>
+                            <span class="w-10 h-10 rounded-2xl bg-sunshine-400 text-slate-900 flex items-center justify-center font-bold text-lg shadow-md border-2 border-white">
+                                🟡
+                            </span>
+                        </div>
+
+                        <!-- Sticker Overlay Badges -->
+                        <div class="absolute top-3 left-3 sticker-rotate-left bg-pink-500 text-white text-[11px] font-fredoka font-bold px-3 py-1 rounded-xl shadow-md border-2 border-white">
+                            DEBUT 18 AUG 2025 ✨
+                        </div>
+                        <div class="absolute top-3 right-3 sticker-rotate-right bg-sunshine-400 text-slate-900 text-[11px] font-fredoka font-bold px-3 py-1 rounded-xl shadow-md border-2 border-white">
+                            🍟 FRENCH FRIES BOY
+                        </div>
+                    </div>
+                    <!-- ================================================================= -->
+
+                    <!-- Quick Spec Grid -->
+                    <div class="grid grid-cols-2 gap-2.5 font-jakarta text-xs">
+                        <div class="bg-sunshine-50 p-3 rounded-2xl border border-amber-200">
+                            <span class="text-amber-800 text-[10px] font-bold block">TANGGAL LAHIR</span>
+                            <span class="font-bold text-slate-900">14 Feb 2009 (Valentine)</span>
+                        </div>
+                        <div class="bg-sunshine-50 p-3 rounded-2xl border border-amber-200">
+                            <span class="text-amber-800 text-[10px] font-bold block">WARNA REPRESENTATIF</span>
+                            <span class="font-extrabold text-amber-700 flex items-center gap-1.5">
+                                <span class="w-3.5 h-3.5 rounded-full bg-sunshine-400 inline-block border border-amber-500"></span> KUNING (YELLOW)
+                            </span>
+                        </div>
+                        <div class="bg-sunshine-50 p-3 rounded-2xl border border-amber-200">
+                            <span class="text-amber-800 text-[10px] font-bold block">POSISI GRUP</span>
+                            <span class="font-bold text-slate-900">Maknae, Vokal, Dancer</span>
+                        </div>
+                        <div class="bg-sunshine-50 p-3 rounded-2xl border border-amber-200">
+                            <span class="text-amber-800 text-[10px] font-bold block">ES KRIM FAVORIT</span>
+                            <span class="font-bold text-amber-900">Salted Caramel 🍦</span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Owl Sound Talent Button -->
+                    <button @click="showTalentToast()" class="w-full mt-4 py-3 bg-gradient-to-r from-sky-100 to-amber-100 border-2 border-sunshine-300 hover:bg-sunshine-200 text-amber-950 font-fredoka text-xs font-bold rounded-2xl transition-all flex items-center justify-center gap-2 shadow-sm">
+                        <span>🦉 BAKAT UNIK: IMITASI SUARA BURUNG HANTU (HOOT!)</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- SECTION 1: PROFIL DAN BIODATA LENGKAP -->
+    <section id="about" class="py-16 bg-white/80 border-y-2 border-amber-200 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b-2 border-amber-200 pb-6">
+                <div>
+                    <span class="text-amber-600 font-fredoka text-xs font-bold tracking-widest uppercase">// ARCHIVE FILE 01</span>
+                    <h2 class="text-4xl sm:text-5xl font-fredoka font-bold text-slate-900 mt-1">
+                        PROFIL & <span class="text-amber-500">BIODATA LENGKAP</span>
+                    </h2>
+                </div>
+                <div class="mt-4 md:mt-0 px-4 py-2 bg-sunshine-100 border border-sunshine-300 rounded-2xl font-fredoka text-xs text-amber-900 font-bold shadow-sm">
+                    OFFICIAL HYBE / BIGHIT MUSIC PROFILE
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+                
+                <!-- Left Dummy Photo Card for Profile -->
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div class="bg-warmBg border-3 border-sunshine-300 p-5 rounded-3xl shadow-lg relative h-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3 font-fredoka text-xs text-amber-900 font-bold">
+                                <span>[PROFIL PHOTO ARCHIVE]</span>
+                                <span>KEONHO CORTIS</span>
+                            </div>
+
+                            <!-- ================================================================= -->
+                            <!-- FOTO DUMMY PROFIL 2 (GANTI URL DI SINI)                            -->
+                            <!-- ================================================================= -->
+                            <div class="relative rounded-2xl overflow-hidden border-2 border-amber-200 shadow-md">
+                                <img
+                                    src="foto 2.jpg" 
+                                    alt="Foto Profil Keonho" 
+                                    class="w-full h-[390px] object-cover hover:scale-105 transition-transform duration-500"
+                                />
+                                <div class="absolute top-3 right-3 bg-sunshine-400 text-slate-900 font-fredoka font-bold text-xs px-3 py-1 rounded-full shadow-md border border-white">
+                                    WARNA: KUNING 💛
+                                </div>
+                            </div>
+                            <!-- ================================================================= -->
+                        </div>
+
+                        <div class="mt-4 p-4 bg-white rounded-2xl border-2 border-amber-200 font-jakarta text-xs space-y-2 shadow-sm">
+                            <div class="flex justify-between border-b border-amber-100 pb-1">
+                                <span class="text-mutedText">Nama Panggung:</span>
+                                <span class="text-amber-700 font-bold">Keonho (건호)</span>
+                            </div>
+                            <div class="flex justify-between border-b border-amber-100 pb-1">
+                                <span class="text-mutedText">Nama Lahir:</span>
+                                <span class="text-slate-900 font-bold">Ahn Geon Ho (안건호)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-mutedText">Grup Musik:</span>
+                                <span class="text-sky-700 font-bold">CORTIS (BigHit Music)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Detailed Profile Cards -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    
+                    <!-- Bio Item 1 -->
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-sunshine-400 transition-all group shadow-md hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sunshine-100 border border-sunshine-300 flex items-center justify-center text-amber-600 text-2xl mb-4 group-hover:bg-sunshine-400 group-hover:text-slate-900 transition-colors">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <span class="text-xs font-fredoka text-amber-600 font-bold block mb-1">IDENTITAS UTAMA</span>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-900 mb-3">Nama & Kelahiran</h3>
+                        <ul class="space-y-2 font-jakarta text-xs text-slate-700">
+                            <li class="flex justify-between"><span class="text-mutedText">Nama Panggung:</span> <strong class="text-amber-700">Keonho (건호)</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Nama Lahir:</span> <strong class="text-slate-900">Ahn Geon Ho (안건호)</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Tanggal Lahir:</span> <strong class="text-pink-600">14 Februari 2009</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Tempat Lahir:</span> <strong class="text-slate-900">Suwon, Gyeonggi-do, KOR</strong></li>
+                        </ul>
+                    </div>
+
+                    <!-- Bio Item 2 -->
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-sky-400 transition-all group shadow-md hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 text-2xl mb-4 group-hover:bg-sky-400 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-address-card"></i>
+                        </div>
+                        <span class="text-xs font-fredoka text-sky-600 font-bold block mb-1">KARAKTERISTIK & MBTI</span>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-900 mb-3">Zodiak & Darah</h3>
+                        <ul class="space-y-2 font-jakarta text-xs text-slate-700">
+                            <li class="flex justify-between"><span class="text-mutedText">Zodiak:</span> <strong class="text-amber-600">Aquarius ♒</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Golongan Darah:</span> <strong class="text-red-500">O</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Tipe MBTI:</span> <strong class="text-sky-600">INTP (Logician)</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Spesialisasi:</span> <strong class="text-amber-700">Composing & Dance</strong></li>
+                        </ul>
+                    </div>
+
+                    <!-- Bio Item 3 -->
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-amber-400 transition-all group shadow-md hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-600 text-2xl mb-4 group-hover:bg-amber-400 group-hover:text-slate-900 transition-colors">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <span class="text-xs font-fredoka text-amber-600 font-bold block mb-1">KARIR & DEDIKASI</span>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-900 mb-3">Grup & Posisi</h3>
+                        <ul class="space-y-2 font-jakarta text-xs text-slate-700">
+                            <li class="flex justify-between"><span class="text-mutedText">Grup Musik:</span> <strong class="text-slate-900">CORTIS</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Agensi:</span> <strong class="text-amber-700">BigHit Music (HYBE)</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Tanggal Debut:</span> <strong class="text-sky-600">18 Agustus 2025</strong></li>
+                            <li class="flex justify-between"><span class="text-mutedText">Posisi Resmi:</span> <strong class="text-amber-800">Maknae, Vokalis, Dancer</strong></li>
+                        </ul>
+                    </div>
+
+                    <!-- Bio Item 4 -->
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-sunshine-400 transition-all group shadow-md hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-2xl bg-sunshine-300 border border-amber-400 flex items-center justify-center text-amber-950 text-2xl mb-4 group-hover:bg-amber-400 transition-colors">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <span class="text-xs font-fredoka text-amber-700 font-bold block mb-1">CORTIS REPRESENTATIVE</span>
+                        <h3 class="font-fredoka font-bold text-xl text-slate-900 mb-3">Warna Representatif</h3>
+                        <div class="p-3 bg-sunshine-100 border-2 border-sunshine-300 rounded-2xl flex items-center space-x-3 mb-1 shadow-sm">
+                            <span class="w-7 h-7 rounded-full bg-sunshine-400 shadow-md border-2 border-white inline-block"></span>
+                            <div>
+                                <span class="font-fredoka text-xs font-bold text-amber-950 block">WARNA REPRESENTATIF: KUNING 💛</span>
+                                <span class="text-[10px] font-jakarta font-medium text-slate-600">Simbol keceriaan, kehangatan & energi muda</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: FAKTA MENARIK KEONHO -->
+    <section id="facts" class="py-16 max-w-7xl mx-auto px-6">
+        <div class="mb-12 text-center max-w-2xl mx-auto">
+            <span class="text-amber-600 font-fredoka text-xs font-bold tracking-widest uppercase">// ARCHIVE FILE 02</span>
+            <h2 class="text-4xl sm:text-5xl font-fredoka font-bold text-slate-900 mt-1">
+                FAKTA MENARIK <span class="text-amber-500">KEONHO</span>
+            </h2>
+            <p class="text-mutedText font-jakarta text-sm mt-2">Kisah unik, latar belakang atletik, dan hal-hal favorit sang maknae</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Fact 1: Mantan Atlet Renang -->
+            <div class="bg-white border-3 border-sunshine-300 p-6 rounded-3xl shadow-lg flex flex-col justify-between relative overflow-hidden group hover:border-amber-400 transition-all">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="px-3 py-1 bg-sunshine-400 text-slate-900 font-fredoka font-bold text-xs rounded-full border border-white shadow-sm">FAKTA #01</span>
+                        <i class="fa-solid fa-person-swimming text-3xl text-sky-500"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-fredoka font-bold text-slate-900 mb-3">Mantan Atlet Renang Pro</h3>
+                    <p class="text-slate-700 text-sm font-jakarta leading-relaxed mb-4">
+                        Sebelum bergabung menjadi trainee BigHit Music pada tahun 2021, Keonho adalah seorang <strong>perenang kompetitif saat sekolah dasar di Suwon</strong>. Kedisiplinan dan stamina tinggi dari dunia renang kini menjadi modal utamanya saat menari di panggung!
+                    </p>
+
+                    <!-- Dummy Photo for Swimmer Fact -->
+                    <div class="rounded-2xl overflow-hidden border-2 border-amber-200 mb-3 shadow-inner">
+                        <img src="renang.jpg" alt="Keonho Swimming Era" class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-amber-100 font-fredoka text-xs text-amber-800">
+                    <span>🏊‍♂️ SD SUWON → TRAINEE BIGHIT 2021</span>
+                </div>
+            </div>
+
+            <!-- Fact 2: Keluarga & Cookie -->
+            <div class="bg-white border-3 border-amber-200 p-6 rounded-3xl shadow-lg flex flex-col justify-between relative overflow-hidden group hover:border-amber-400 transition-all">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="px-3 py-1 bg-pink-400 text-white font-fredoka font-bold text-xs rounded-full border border-white shadow-sm">FAKTA #02</span>
+                        <i class="fa-solid fa-dog text-3xl text-amber-500"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-fredoka font-bold text-slate-900 mb-3">Keluarga & Cookie 🐶</h3>
+                    <p class="text-slate-700 text-sm font-jakarta leading-relaxed mb-4">
+                        Keonho tumbuh dalam keluarga yang hangat di Suwon. Ia memiliki seorang <strong>kakak perempuan</strong> yang sangat mendukung karier musiknya, serta seekor anjing peliharaan kesayangan keluarga bernama <strong class="text-amber-700">Cookie</strong>.
+                    </p>
+
+                    <!-- Dummy Photo for Dog Fact -->
+                    <div class="rounded-2xl overflow-hidden border-2 border-amber-200 mb-3 shadow-inner">
+                        <img src="anjing.jpg" alt="Cookie Pet Dog" class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-amber-100 font-fredoka text-xs text-pink-600">
+                    <span>🐶 PARENTS, KAKAK PEREMPUAN & COOKIE</span>
+                </div>
+            </div>
+
+            <!-- Fact 3: Makanan Favorit -->
+            <div class="bg-white border-3 border-sunshine-300 p-6 rounded-3xl shadow-lg flex flex-col justify-between relative overflow-hidden group hover:border-amber-400 transition-all">
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="px-3 py-1 bg-amber-400 text-slate-900 font-fredoka font-bold text-xs rounded-full border border-white shadow-sm">FAKTA #03</span>
+                        <i class="fa-solid fa-utensils text-3xl text-amber-500"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-fredoka font-bold text-slate-900 mb-3">French Fries & Ice Cream</h3>
+                    <p class="text-slate-700 text-sm font-jakarta leading-relaxed mb-4">
+                        Makanan favorit Keonho yang paling terkenal adalah <strong>Kentang Goreng (French Fries) 🍟</strong>—yang memberikannya julukan legendaris <i>"French Fry Boy"</i> saat trainee—serta <strong>Es Krim Rasa Salted Caramel 🍦</strong>.
+                    </p>
+
+                    <!-- Dummy Photo for Food Fact -->
+                    <div class="rounded-2xl overflow-hidden border-2 border-amber-200 mb-3 shadow-inner">
+                        <img src="kentang.jpg" alt="French Fries and Ice Cream" class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-amber-100 font-fredoka text-xs text-amber-800">
+                    <span>🍟 FRENCH FRIES & 🍦 SALTED CARAMEL ICE CREAM</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: PERJALANAN KARIR TIMELINE -->
+    <section id="timeline" class="py-16 bg-white/60 border-t-2 border-amber-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-14">
+                <span class="text-amber-600 font-fredoka text-xs font-bold tracking-widest uppercase">// ARCHIVE FILE 03</span>
+                <h2 class="text-4xl sm:text-5xl font-fredoka font-bold text-slate-900 mt-1">
+                    PERJALANAN <span class="text-amber-500">HIDUP KEONHO</span>
+                </h2>
+                <p class="text-mutedText font-jakarta text-sm mt-2">Jejak langkah dari kolam renang hingga panggung dunia</p>
+            </div>
+
+            <div class="relative border-l-4 border-sunshine-400 pl-6 lg:pl-10 space-y-10 ml-3 lg:ml-6">
+
+                <!-- Timeline 1 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] lg:-left-[47px] top-1 w-8 h-8 rounded-full bg-sunshine-300 border-4 border-white flex items-center justify-center group-hover:scale-125 transition-transform shadow-md">
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+                    </div>
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-sunshine-400 transition-all shadow-md">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="px-3 py-1 bg-sunshine-400 text-slate-900 font-fredoka font-bold text-xs rounded-xl shadow-sm">MASA KECIL - SD</span>
+                            <span class="text-amber-800 font-fredoka text-xs font-bold">Suwon, Gyeonggi-do</span>
+                        </div>
+                        <h3 class="text-2xl font-fredoka font-bold text-slate-900">Perenang Kompetitif Berprestasi</h3>
+                        <p class="text-slate-700 text-sm mt-2 font-jakarta leading-relaxed">
+                            Keonho menekuni cabang olahraga renang sejak kecil di Suwon dan berhasil mencetak berbagai prestasi kejuaraan renang sekolah dasar sebelum menemukan passion besarnya di bidang seni pertunjukan K-Pop.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline 2 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] lg:-left-[47px] top-1 w-8 h-8 rounded-full bg-sky-300 border-4 border-white flex items-center justify-center group-hover:scale-125 transition-transform shadow-md">
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+                    </div>
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-sky-400 transition-all shadow-md">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="px-3 py-1 bg-sky-400 text-white font-fredoka font-bold text-xs rounded-xl shadow-sm">TAHUN 2021</span>
+                            <span class="text-sky-700 font-fredoka text-xs font-bold">BigHit Music Trainee</span>
+                        </div>
+                        <h3 class="text-2xl font-fredoka font-bold text-slate-900">Lolos Audisi & Era Trainee "French Fry Boy"</h3>
+                        <p class="text-slate-700 text-sm mt-2 font-jakarta leading-relaxed">
+                            Resmi menjadi trainee BigHit Music pada tahun 2021. Momen-momen lucunya saat menikmati kentang goreng di sela-sela latihan menjadikannya akrab dipanggil "French Fry Boy" oleh para staf dan penggemar.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline 3 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] lg:-left-[47px] top-1 w-8 h-8 rounded-full bg-amber-400 border-4 border-white flex items-center justify-center group-hover:scale-125 transition-transform shadow-md">
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-900"></div>
+                    </div>
+                    <div class="bg-white border-2 border-amber-200 p-6 rounded-3xl hover:border-amber-400 transition-all shadow-md">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="px-3 py-1 bg-amber-400 text-slate-900 font-fredoka font-bold text-xs rounded-xl shadow-sm">18 AGUSTUS 2025</span>
+                            <span class="text-amber-800 font-fredoka text-xs font-bold">Official Debut Day</span>
+                        </div>
+                        <h3 class="text-2xl font-fredoka font-bold text-slate-900">Debut Resmi Bersama Grup CORTIS</h3>
+                        <p class="text-slate-700 text-sm mt-2 font-jakarta leading-relaxed">
+                            Keonho secara resmi melakukan debut besarnya sebagai <strong>Maknae, Vokalis, dan Dancer</strong> dari grup CORTIS di bawah BigHit Music. Penampilan panggung pertamanya langsung mencuri perhatian dunia!
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: KARYA MUSIK & DISCOGRAPHY CREDITS -->
+    <section id="discography" class="py-16 max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+            <div>
+                <span class="text-amber-600 font-fredoka text-xs font-bold tracking-widest uppercase">// ARCHIVE FILE 04</span>
+                <h2 class="text-4xl sm:text-5xl font-fredoka font-bold text-slate-900 mt-1">
+                    KARYA MUSIK & <span class="text-amber-500">CREDITS</span>
+                </h2>
+            </div>
+            <p class="text-mutedText font-fredoka text-xs font-bold mt-2 md:mt-0">SONGS COMPOSED & PERFORMED BY KEONHO</p>
+        </div>
+
+        <!-- Track Selector and Details -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Track List Buttons -->
+            <div class="lg:col-span-5 space-y-3">
+                <template x-for="(track, index) in tracks" :key="index">
+                    <button 
+                        @click="selectedTrack = track"
+                        :class="selectedTrack.title === track.title ? 'bg-sunshine-400 text-slate-900 font-bold border-2 border-white shadow-lg scale-[1.02]' : 'bg-white text-slate-700 border-2 border-amber-200 hover:border-amber-300'"
+                        class="w-full text-left p-4 rounded-2xl transition-all flex items-center justify-between group">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xs font-fredoka font-bold px-3 py-1 bg-white/60 rounded-xl text-slate-900" x-text="'0' + (index + 1)"></span>
+                            <div>
+                                <h4 class="font-fredoka font-bold text-lg" x-text="track.title"></h4>
+                                <p class="text-xs font-jakarta opacity-90" x-text="track.album"></p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-fredoka uppercase font-bold tracking-wider px-2.5 py-1 rounded-lg border border-current" x-text="track.role"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Track Detail Display Container with Dummy Artwork -->
+            <div class="lg:col-span-7 bg-white border-3 border-sunshine-300 p-8 rounded-3xl shadow-xl relative flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start border-b-2 border-amber-100 pb-4 mb-6">
+                        <div>
+                            <span class="text-xs font-fredoka text-amber-700 font-bold uppercase tracking-widest" x-text="selectedTrack.album"></span>
+                            <h3 class="text-4xl font-fredoka font-bold text-slate-900 mt-1" x-text="selectedTrack.title"></h3>
+                        </div>
+                        <span class="px-4 py-1.5 bg-sunshine-400 text-slate-900 font-fredoka font-bold text-xs rounded-full shadow-sm" x-text="selectedTrack.year"></span>
+                    </div>
+
+                    <!-- Album Cover Art Placeholder -->
+                    <div class="mb-6 rounded-2xl overflow-hidden border-2 border-amber-200 shadow-sm">
+                        <img src="cortis.jpg" alt="Album Art Placeholder" class="w-full h-44 object-cover">
+                    </div>
+
+                    <div class="space-y-4 font-jakarta text-sm">
+                        <div>
+                            <span class="text-mutedText block text-xs font-bold">PERAN KEONHO DALAM LAGU:</span>
+                            <p class="text-amber-800 font-bold text-lg" x-text="selectedTrack.roleFull"></p>
+                        </div>
+
+                        <div>
+                            <span class="text-mutedText block text-xs font-bold">DESKRIPSI & KONSEP:</span>
+                            <p class="text-slate-700 leading-relaxed mt-1" x-text="selectedTrack.description"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t-2 border-amber-100 flex items-center justify-between font-fredoka text-xs">
+                    <span class="text-mutedText font-bold">CORTIS OFFICIAL DISCOGRAPHY</span>
+                    <div class="flex items-center space-x-2 text-amber-700 font-bold">
+                        <i class="fa-solid fa-compact-disc animate-spin text-amber-500"></i>
+                        <span>BIGHIT MUSIC</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: FAN ROOM & STICKY NOTE BOARD -->
+    <section id="fanzone" class="py-16 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-amber-600 font-fredoka text-xs font-bold tracking-widest uppercase">// ARCHIVE FILE 05</span>
+            <h2 class="text-4xl sm:text-5xl font-fredoka font-bold text-slate-900 mt-1">
+                FAN ROOM <span class="text-amber-500">KEONHO</span> 💛
+            </h2>
+            <p class="text-mutedText font-jakarta text-sm mt-2">Kirimkan pesan dukungan dan sticky note ceria khusus untuk Keonho!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Sticky Note Input Form -->
+            <div class="lg:col-span-5 bg-white border-3 border-amber-200 p-6 rounded-3xl space-y-4 shadow-xl">
+                <h3 class="text-xl font-fredoka font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-note-sticky text-amber-500"></i> Tulis Sticky Note
+                </h3>
+
+                <div>
+                    <label class="block font-fredoka text-xs text-slate-700 mb-1">NAMA / NICKNAME</label>
+                    <input x-model="newNote.author" type="text" placeholder="misal: Keonho_YellowBias_💛" class="w-full bg-sunshine-50 border-2 border-amber-200 rounded-2xl p-3 text-sm text-slate-900 focus:outline-none focus:border-amber-400 font-jakarta font-medium">
+                </div>
+
+                <div>
+                    <label class="block font-fredoka text-xs text-slate-700 mb-1">PESAN DUKUNGAN</label>
+                    <textarea x-model="newNote.text" rows="3" placeholder="Semangat terus Keonho-ya! 🍟🍦💛" class="w-full bg-sunshine-50 border-2 border-amber-200 rounded-2xl p-3 text-sm text-slate-900 focus:outline-none focus:border-amber-400 font-jakarta font-medium"></textarea>
+                </div>
+
+                <div>
+                    <label class="block font-fredoka text-xs text-slate-700 mb-2">PILIH WARNA STICKY NOTE</label>
+                    <div class="flex space-x-3">
+                        <button @click="newNote.color = 'yellow'" :class="newNote.color === 'yellow' ? 'ring-4 ring-amber-400' : ''" class="w-9 h-9 rounded-full bg-sunshine-300 shadow-md border-2 border-white"></button>
+                        <button @click="newNote.color = 'sky'" :class="newNote.color === 'sky' ? 'ring-4 ring-sky-400' : ''" class="w-9 h-9 rounded-full bg-sky-300 shadow-md border-2 border-white"></button>
+                        <button @click="newNote.color = 'pink'" :class="newNote.color === 'pink' ? 'ring-4 ring-pink-400' : ''" class="w-9 h-9 rounded-full bg-pink-300 shadow-md border-2 border-white"></button>
+                        <button @click="newNote.color = 'mint'" :class="newNote.color === 'mint' ? 'ring-4 ring-emerald-400' : ''" class="w-9 h-9 rounded-full bg-emerald-200 shadow-md border-2 border-white"></button>
+                    </div>
+                </div>
+
+                <button @click="addNote()" class="w-full py-3.5 bg-gradient-to-r from-sunshine-400 via-amber-400 to-amber-500 text-slate-900 font-fredoka font-bold rounded-2xl hover:scale-[1.02] transition-all shadow-lg bright-glow border-2 border-white">
+                    POST STICKY NOTE 🚀
+                </button>
+            </div>
+
+            <!-- Sticky Notes Wall Board -->
+            <div class="lg:col-span-7 bg-white/80 border-3 border-sunshine-300 p-6 rounded-3xl min-h-[380px] flex flex-col justify-between shadow-xl">
+                <div>
+                    <div class="flex justify-between items-center border-b-2 border-amber-100 pb-3 mb-4 font-fredoka text-xs">
+                        <span class="text-amber-800 font-bold">FAN WALL BOARD</span>
+                        <span class="text-mutedText font-bold" x-text="notes.length + ' Pesan Terpasang'"></span>
+                    </div>
+
+                    <!-- Notes Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[380px] overflow-y-auto pr-2">
+                        <template x-for="(note, idx) in notes" :key="idx">
+                            <div :class="getNoteColorClass(note.color)" class="p-4 rounded-2xl font-jakarta text-xs relative shadow-md transform hover:scale-105 transition-transform border-2 border-white">
+                                <div class="flex justify-between items-center mb-2 border-b border-slate-900/10 pb-1">
+                                    <span class="font-fredoka font-bold text-slate-900" x-text="note.author"></span>
+                                    <span class="text-[10px] font-bold text-slate-700">CORTIS FAN</span>
+                                </div>
+                                <p class="font-jakarta text-sm font-semibold text-slate-800 leading-snug" x-text="note.text"></p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t-2 border-amber-200 py-10 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-sunshine-400 text-slate-900 font-fredoka font-bold flex items-center justify-center rounded-2xl border-2 border-white shadow-md">
+                    KH
+                </div>
+                <span class="font-fredoka font-bold text-slate-900 text-lg">AHN GEON HO // CORTIS KEONHO 💛</span>
+            </div>
+
+            <div class="font-fredoka text-xs text-slate-600 text-center md:text-right">
+                <p>OFFICIAL BRIGHT FAN ARCHIVE PORTFOLIO FOR KEONHO (안건호)</p>
+                <p class="mt-1 text-amber-600 font-bold">BIGHIT MUSIC • HYBE LABELS • DEBUT 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ALPINE JS LOGIC -->
+    <script>
+      function keonhoApp() {
+        return {
+          isPlaying: false,
+          showToast: false,
+          toastMessage: '',
+          
+          triggerNotification(msg) {
+            this.toastMessage = msg;
+            this.showToast = true;
+            setTimeout(() => {
+              this.showToast = false;
+            }, 3000);
+          },
+
+          toggleMusic() {
+            this.isPlaying = !this.isPlaying;
+            if (this.isPlaying) {
+              this.triggerNotification("▶️ Memutar Preview Audio Ceria: CORTIS - GO!");
+            } else {
+              this.triggerNotification("⏸️ Audio Dihentikan");
+            }
+          },
+
+          showTalentToast() {
+            this.triggerNotification("🦉 Hoot Hoot! Keonho menirukan suara burung hantu dengan imut!");
+          },
+
+          selectedTrack: {
+            title: "GO!",
+            album: "COLOR OUTSIDE THE LINES",
+            year: "SEP 2025",
+            role: "Write / Comp / Dance",
+            roleFull: "Penulisan Lirik, Komposisi Musik & Partisipasi Koreografi",
+            description: "Lagu penuh energi positif yang menampilkan vokal ceria dan aksi dance Keonho yang sangat memukau!"
+          },
+
+          tracks: [
+            {
+              title: "GO!",
+              album: "COLOR OUTSIDE THE LINES",
+              year: "SEP 2025",
+              role: "Write / Comp / Dance",
+              roleFull: "Penulisan Lirik, Komposisi Musik & Partisipasi Koreografi",
+              description: "Lagu penuh energi positif yang menampilkan vokal ceria dan aksi dance Keonho yang sangat memukau!"
+            },
+            {
+              title: "What You Want",
+              album: "DEBUT SINGLE",
+              year: "AUG 2025",
+              role: "Vocal / Dance",
+              roleFull: "Main Vocal & Dance Performance",
+              description: "Lagu debut bersejarah CORTIS pada 18 Agustus 2025 yang menandai awal karier Keonho di industri musik global."
+            },
+            {
+              title: "JoyRide",
+              album: "COLOR OUTSIDE THE LINES",
+              year: "SEP 2025",
+              role: "Producing / Writing",
+              roleFull: "Co-Producing, Writing & Composing",
+              description: "Lagu ceria bernuansa musim panas yang riang dengan sentuhan melodi kesukaan Keonho."
+            }
+          ],
+
+          newNote: {
+            author: '',
+            text: '',
+            color: 'yellow'
+          },
+
+          notes: [
+            { author: "KeonhoYellow_💛", text: "Keonho-ya! Tetap sehat, selalu ceria, dan terus berkarya bersama CORTIS! We love you! 💛", color: "yellow" },
+            { author: "FrenchFry_Fan", text: "Jangan lupa makan kentang goreng & es krim salted caramel favoritmu hari ini! 🍟🍦", color: "sky" },
+            { author: "SwimmerKeonho", text: "Bangga banget dari perenang SD Suwon sampai jadi idol sehebat ini! ✨", color: "mint" },
+            { author: "BigHit_Stan", text: "Vokal dan dance Keonho di panggung selalu bikin bahagia! ☀️", color: "pink" }
+          ],
+
+          addNote() {
+            if (this.newNote.author.trim() === '' || this.newNote.text.trim() === '') {
+              this.triggerNotification("⚠️ Harap isi nama dan pesan dukunganmu terlebih dahulu!");
+              return;
+            }
+            this.notes.unshift({
+              author: this.newNote.author,
+              text: this.newNote.text,
+              color: this.newNote.color
+            });
+            this.triggerNotification("🚀 Sticky note ceria berhasil terpasang di Fan Wall!");
+            this.newNote.author = '';
+            this.newNote.text = '';
+          },
+
+          getNoteColorClass(color) {
+            switch(color) {
+              case 'yellow': return 'bg-sunshine-200 text-slate-900';
+              case 'sky': return 'bg-sky-200 text-slate-900';
+              case 'pink': return 'bg-pink-200 text-slate-900';
+              case 'mint': return 'bg-emerald-200 text-slate-900';
+              default: return 'bg-sunshine-200 text-slate-900';
+            }
+          }
+        }
+      }
+    </script>
+</body>
+</html>
